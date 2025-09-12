@@ -1,0 +1,138 @@
+/* Full page background */
+.chat-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  width: 900vh;
+  position: center;
+  background: linear-gradient(135deg, #ffe8e8, #ffd6b5);
+  padding: 20px;
+  box-sizing: border-box;
+  background-size: cover;
+}
+
+/* Chat container */
+.chat-card {
+  display: flex;
+  flex-direction: column;
+  width: 600px;              /* Same size as your client chat */
+  height: 600px;             /* Fixed height */
+  background: #5c1eac;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* Chat header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: linear-gradient(90deg, #ff6a3d, #ff416c);
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 20px 20px 0 0;
+}
+
+.chat-header button {
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.chat-header button:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Messages area */
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Message bubbles */
+.chat-message {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chat-message.received {
+  align-self: flex-start;
+  background: #e6e6eb;
+  color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+.chat-message.sent {
+  align-self: flex-end;
+  background: #4a6cff;
+  color: #fff;
+  border-bottom-right-radius: 5px;
+}
+
+/* Input area */
+.chat-input {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+
+.chat-input input:focus {
+  border: 1px solid #ff6a3d;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  background: linear-gradient(90deg, #ff6a3d, #ff416c);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.chat-input button:hover {
+  opacity: 0.9;
+}
+
+/* Scrollbar */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}

@@ -1,0 +1,131 @@
+/* src/pages/provider/CreateProfile.css */
+
+.create-profile-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 50px;
+  background: linear-gradient(to top left, #ffffff, #f2f2f2);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.3s ease-in-out;
+}
+
+.create-profile-container:hover {
+  transform: scale(1.01);
+}
+
+.create-profile-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2d2d2d;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.create-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.create-profile-form .form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.create-profile-form .form-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.create-profile-form .form-group input,
+.create-profile-form .form-group select,
+.create-profile-form .form-group textarea {
+  padding: 14px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.create-profile-form .form-group input:focus,
+.create-profile-form .form-group select:focus,
+.create-profile-form .form-group textarea:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.4);
+  outline: none;
+}
+
+.create-profile-form .form-group input::placeholder,
+.create-profile-form .form-group textarea::placeholder {
+  color: #999;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.create-profile-form .form-group input[type="file"] {
+  padding: 12px;
+  background-color: #fafafa;
+  border: 1px dashed #aaa;
+  cursor: pointer;
+}
+
+.create-profile-form button {
+  padding: 16px;
+  background: linear-gradient(to right, #4CAF50, #45a049);
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.create-profile-form button:hover {
+  background: linear-gradient(to right, #45a049, #3d8b40);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.preview-image:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .create-profile-container {
+    padding: 30px;
+  }
+
+  .create-profile-form .form-group input,
+  .create-profile-form .form-group select,
+  .create-profile-form .form-group textarea {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mongodb": "^6.15.0",
+    "react-modal": "^3.16.3",
+    "react-spinners": "^0.17.0",
+    "react-toastify": "^11.0.5"
+  }
+}

@@ -1,0 +1,103 @@
+/* src/components/auth/Auth.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3), rgba(0,0,0,0.1));
+   background-image: url(../../../public/assets/background.webp);
+  position: relative;
+}
+
+.auth-card {
+  /*background: rgba(255, 255, 255, 0.7);*/
+  background: transparent;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  backdrop-filter: blur(15px);
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+}
+
+.auth-card h2 {
+  margin-bottom: 25px;
+  color: #333;
+  text-align: center;
+}
+
+.auth-card input,
+.auth-card select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #e2dddd;
+}
+
+.auth-card input:hover,
+.auth-card select:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(255, 117, 140, 0.4);
+  background: #fff;
+}
+
+.auth-card input:focus,
+.auth-card select:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(255, 122, 122, 0.5);
+  background: #fff;
+  transform: scale(1.05);
+}
+
+.login-btn {
+  background: #ff758c;
+  background: linear-gradient(135deg, #f475ff, #ff7eb3);
+  color: white;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Optional background interactive effect */
+.interactive-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(#ffffff22 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.auth-card * {
+  position: relative;
+  z-index: 2;
+}

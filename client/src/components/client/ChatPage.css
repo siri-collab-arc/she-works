@@ -1,0 +1,207 @@
+/* === Chat Page Wrapper (Background & Layout) === */
+.chat-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 90vh;
+
+  background: linear-gradient(135deg, #e4cdba, #bb7b48, #d49645);
+  background-size: 200% 200%;
+  animation: gradientMove 12s ease infinite;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Smooth animated gradient */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Chat Container === */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 850px;
+  height: 60vh;
+
+  background: rgba(245, 212, 180, 0.85);
+  backdrop-filter: blur(12px);
+
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-page:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* === Header === */
+.chat-header {
+  background: linear-gradient(90deg, #e58e46, #e58e46);
+  color: white;
+  padding: 1rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.5px;
+  width:600px;
+
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* === Chat Body (Messages) === */
+.chat-body {
+  flex: 1;
+  padding: 1.2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width : 590px;
+  background: #f9fafb;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Scrollbar Styling */
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 40px;
+  width : 4px;
+}
+
+/* === Messages === */
+.message, .typing-indicator {
+  max-width: 70%;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  word-break: break-word;
+  line-height: 1.4;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.message:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Sent & Received Styles */
+.sent {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  align-self: flex-end;
+  border-top-right-radius: 6px;
+}
+
+.received {
+  background-color: #e5e7eb;
+  color: #111827;
+  align-self: flex-start;
+  border-top-left-radius: 6px;
+}
+
+/* Avatar */
+.avatar {
+  font-size: 1.6rem;
+  margin-top: 4px;
+}
+
+/* Timestamp */
+.timestamp {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* Typing Indicator */
+.typing-indicator .dots {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* === Input Section === */
+.chat-input {
+  display: flex;
+  padding: 1rem 1.2rem;
+  border-top: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  gap: 0.75rem;
+  width: 605px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 24px;
+  outline: none;
+  font-size: 1rem;
+
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.chat-input input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  background: #ffffff;
+}
+
+.chat-input button {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.3rem;
+  border-radius: 24px;
+  cursor: pointer;
+
+  font-weight: 500;
+  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-input button:hover {
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+/* === Mobile View === */
+@media (max-width: 640px) {
+  .chat-page {
+    height: 100vh;
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .chat-header {
+    font-size: 1.1rem;
+  }
+
+  .chat-input input,
+  .chat-input button {
+    font-size: 0.9rem;
+  }
+}
