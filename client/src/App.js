@@ -9,12 +9,11 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
 import ClientProfilePage from "./components/client/ClientProfilePage";
-
+import ClientProfileEditPage from './components/client/ClientProfileEditPage';
 
 // Client Pages
 import ClientDashboard from './components/client/ClientDashboard';
 import CategoryPage from './components/client/CategoryPage';
-//import ServiceProvidersList from "./components/client/ServiceProvidersList";
 import ServiceList from './components/client/ServiceList';
 import ProviderProfileC from './components/client/ProviderProfileC';
 import BookingPage from './components/client/BookingPage';
@@ -35,6 +34,8 @@ import ProviderChat from './components/provider/ProviderChat';
 // Shared
 import NotFound from './components/shared/NotFound';
 
+
+
 function App() {
   return (
     <Router>
@@ -50,14 +51,13 @@ function App() {
         <Route path="/" element={<ClientDashboard />} />
         <Route path="/services/:category" element={<CategoryPage />} />
         <Route path="/services/:category/:subService" element={<ServiceList />} />
-        {/* <Route path="/services/:category" element={<ServiceProvidersList />} /> */}
-        {/* <Route path="/services/:category" element={<ServiceList />} /> */}
         <Route path="/provider/:providerId" element={<ProviderProfileC />} />
         <Route path="/client/book/:providerId" element={<BookingPage />} />
         <Route path="/client/chat/:providerId" element={<ChatPage />} />
         <Route path="/client/payment/:providerId" element={<PaymentPage />} />
         <Route path="/client/writereview/:providerId" element={<WriteReviewPage/>}/>
         <Route path="/client/profile" element={<ClientProfilePage />} />
+        <Route path="/client/edit-profile" element={<ClientProfileEditPage />} />
         
 
 

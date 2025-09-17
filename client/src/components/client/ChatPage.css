@@ -6,7 +6,7 @@
   padding: 2rem;
   min-height: 90vh;
 
-  background: linear-gradient(135deg, #e4cdba, #bb7b48, #d49645);
+   background: linear-gradient(135deg, #FDF6F0 0%, #E85A4F 100%);
   background-size: 200% 200%;
   animation: gradientMove 12s ease infinite;
 
@@ -24,9 +24,9 @@
 .chat-page {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 850px;
-  height: 60vh;
+  /* width: 100vh; */
+  max-width: 950px;
+  height: 90vh;
 
   background: rgba(245, 212, 180, 0.85);
   backdrop-filter: blur(12px);

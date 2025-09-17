@@ -10,7 +10,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ff7eb3;
+  border: 2px solid #f05729;
   cursor: pointer;
   transition: transform 0.2s ease;
   display: flex;
@@ -23,8 +23,9 @@
 }
 
 .initials-circle {
-  background: linear-gradient(135deg, #f0ecee, #f0c8c8);
-  color: white;
+  /* background: linear-gradient(135deg, #f0ecee, #ec5454); */
+   background: rgb(228, 94, 17);
+  color: rgb(250, 217, 217);
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;

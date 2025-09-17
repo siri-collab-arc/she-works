@@ -1,51 +1,92 @@
 .client-profile-container {
   padding: 20px;
-  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
 }
 
 .profile-details {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
 .profile-large {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #ff7eb3;
-  margin-bottom: 15px;
 }
 
-.profile-info {
-  text-align: left;
-}
-
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: left;
-}
-
-.edit-form input {
-  padding: 6px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button {
-  margin-top: 10px;
+.edit-profile-btn {
   padding: 8px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   background: linear-gradient(135deg, #ff7eb3, #ff758c);
   color: white;
-  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-button:hover {
+.edit-profile-btn:hover {
   background: linear-gradient(135deg, #ff5678, #ff4a7d);
+}
+
+.profile-section {
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.profile-section h3 {
+  margin-bottom: 10px;
+}
+
+.profile-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-section li {
+  margin-bottom: 8px;
+}
+
+.status {
+  font-weight: bold;
+  color: #ff5678;
+}
+/* Logout button positioned at top-right */
+.logout-btn-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout-btn {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 6px 14px;   /* smaller size */
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #e63950;
+  transform: scale(1.05);
 }

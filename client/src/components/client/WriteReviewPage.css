@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: rgb(250, 203, 143);
+  background: linear-gradient(135deg, #FDF6F0 0%, #E85A4F 100%);
   padding: 2rem;
 }
 

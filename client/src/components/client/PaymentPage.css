@@ -4,7 +4,7 @@
   align-items: center;
   padding: 40px;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #fdfcfb, #e2d1c3);
+  background: linear-gradient(135deg, #FDF6F0 0%, #E85A4F 100%);
   min-height: 100vh;
 }
 
