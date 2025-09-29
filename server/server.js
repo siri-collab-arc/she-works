@@ -1,27 +1,48 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const connectDB = require('./db');  // 👈 use your db.js file
+// server.js
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+require("dotenv").config();
+const connectDB = require("./config/db");
+const path = require("path");
 
-// Connect Database
+
+// ----------------- Connect to Database -----------------
 connectDB();
 
+// ----------------- Initialize App -----------------
 const app = express();
-app.use(cors());
+
+// ----------------- Middlewares -----------------
+app.use(cors({
+  origin: 'http://localhost:3000', // your React frontend
+  credentials: true
+}));
+app.use(helmet());
+app.use(morgan("dev"));
 app.use(express.json());
 
-// Routes
-const userRoutes = require('./routes/userRoutes');
-const serviceRoutes = require('./routes/serviceRoutes');
 
-app.use('/api/users', userRoutes);
-app.use('/api/services', serviceRoutes);
+// Serve uploads folder statically
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ----------------- Routes -----------------
+const authRoutes = require("./routes/authRoutes");
+const serviceRoutes = require("./routes/serviceRoutes");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/services", serviceRoutes);
 
 // Default route
-app.get('/', (req, res) => {
-  res.send('SheWorks API is running...');
+app.get("/", (req, res) => res.send("SheWorks API is running... 🚀"));
+
+// ----------------- Error Handling -----------------
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err.stack || err);
+  res.status(500).json({ message: "Something went wrong", error: err.message });
 });
 
-// Start server
+// ----------------- Start Server -----------------
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
