@@ -191,23 +191,33 @@ const ProviderProfileView = () => {
 
   // Helper to build image URLs
   const getFullImageURL = (path) => {
-    if (!path) return "/assets/default-profile.png";
-    return path.startsWith("http")
-      ? path
-      : `${BASE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
+    if (!path || path === "") {
+      return "https://via.placeholder.com/150x150.png?text=Upload+Photo";
+    }
+    if (path.startsWith("http")) {
+      return path;
+    }
+    // Add timestamp to prevent caching
+    return `${BASE_URL}${path.startsWith("/") ? "" : "/"}${path}?t=${new Date().getTime()}`;
   };
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
-        if (!user || !user._id) {
+        if (!user || !user.id) {
           navigate("/login");
           return;
         }
 
         // Fetch user (with profile image)
-        const res = await axios.get(`${BASE_URL}/api/auth/user/${user._id}`);
+        const token = localStorage.getItem('token');
+        const res = await axios.get(`${BASE_URL}/api/auth/user/${user.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(res)
         setProfile(res.data);
       } catch (err) {
         console.error("Fetch profile error:", err);
@@ -230,11 +240,84 @@ const ProviderProfileView = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="profile-header">
-        <img
-          src={getFullImageURL(profile.profileImage)}
-          alt={profile.name}
-          className="profile-pic-circle"
-        />
+        <div className="profile-image-container">
+          <img
+            src={getFullImageURL(profile.profileImage)}
+            alt={profile.name}
+            className="profile-pic-circle"
+          />
+          <label className="profile-image-upload">
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+
+                // Validate file size
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                  alert('Image size should be less than 5MB');
+                  return;
+                }
+
+                // Validate file type
+                const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+                if (!validTypes.includes(file.type)) {
+                  alert('Please select a valid image file (JPEG, PNG, GIF, or WEBP)');
+                  return;
+                }
+
+                const formData = new FormData();
+                formData.append('profileImage', file);
+
+                try {
+                  const token = localStorage.getItem('token');
+                  if (!token) {
+                    alert('Please login again');
+                    navigate('/login');
+                    return;
+                  }
+
+                  const response = await axios.post(
+                    `${BASE_URL}/api/auth/profile-image`,
+                    formData,
+                    {
+                      headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                      }
+                    }
+                  );
+
+                  if (response.data && response.data.profileImage) {
+                    // Update the profile state with new image and user data
+                    setProfile(prev => ({
+                      ...prev,
+                      ...response.data.user
+                    }));
+                    
+                    // Update the local storage user data
+                    const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+                    localStorage.setItem('user', JSON.stringify({
+                      ...currentUser,
+                      profileImage: response.data.profileImage
+                    }));
+                    
+                    // Show success message
+                    alert('Profile image updated successfully');
+                  } else {
+                    throw new Error('Invalid server response');
+                  }
+                } catch (err) {
+                  console.error('Profile image upload error:', err);
+                  alert(err.response?.data?.message || 'Failed to upload profile image. Please try again.');
+                }
+              }}
+            />
+            📷 Update Photo
+          </label>
+        </div>
         <h2>{profile.name}</h2>
         <p>{profile.email}</p>
         <p>{profile.contact}</p>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/api";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +20,13 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await api.post("/auth/login", {
         email: formData.email,
         password: formData.password,
+        role: formData.role,
       });
+
+      console.log(res)
 
       const { token, user } = res.data;
 
@@ -39,11 +42,14 @@ const Login = () => {
 
       // ✅ Redirect logic
       if (user.role === "client") {
-        navigate("/client/ClientDashboard");
+        navigate("/client/dashboard");
       } else if (user.role === "provider") {
+        console.log("Here1")
         if (user.hasProfile) {
+          console.log("Here2")
           navigate("/provider/ProviderProfileView");
         } else {
+          console.log("Here3")
           navigate("/provider/CreateProfile");
         }
       } else {
