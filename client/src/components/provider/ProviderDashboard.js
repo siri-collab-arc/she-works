@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './ProviderDashboard.css';
 
 const ProviderDashboard = () => {
@@ -7,7 +8,28 @@ const ProviderDashboard = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   const handleLogout = () => {
-    localStorage.clear();
+    setShowConfirm(true);
+  };
+
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const backendLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      await axios.post('http://localhost:5000/api/auth/logout', {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+    } catch (err) {
+      console.warn('Backend logout failed or missing', err?.message || err);
+    }
+  };
+
+  const doLogout = async () => {
+    await backendLogout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    try { localStorage.removeItem('cart'); } catch (e) {}
     navigate('/login');
   };
 
@@ -28,7 +50,7 @@ const ProviderDashboard = () => {
       title: 'Messages',
       icon: '💬',
       description: 'Chat with your clients',
-      link: '/provider/ProviderChat'
+      link: '/provider/ProviderChat/'
     },
     {
       title: 'Reviews',
@@ -61,6 +83,18 @@ const ProviderDashboard = () => {
           </button>
         </div>
       </header>
+
+      {showConfirm && (
+        <div className="confirm-overlay">
+          <div className="confirm-box">
+            <p>Are you sure you want to logout?</p>
+            <div className="confirm-actions">
+              <button onClick={() => setShowConfirm(false)}>Cancel</button>
+              <button onClick={doLogout}>Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Quick Stats */}
       <div className="stats-container">

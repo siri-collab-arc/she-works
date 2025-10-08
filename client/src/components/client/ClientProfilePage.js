@@ -2,6 +2,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ClientProfilePage.css";
+import axios from 'axios';
+
+const backendLogout = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    await axios.post('http://localhost:5000/api/auth/logout', {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  } catch (err) {
+    // ignore errors - endpoint may not exist or network issues
+    console.warn('Backend logout failed or not available', err?.response?.data || err.message);
+  }
+};
 
 const ClientProfilePage = () => {
   const navigate = useNavigate();
@@ -29,11 +43,19 @@ const ClientProfilePage = () => {
   };
 
   const handleLogout = () => {
-    // Clear localStorage/sessionStorage when real auth is connected
-    localStorage.removeItem("clientToken");
-    localStorage.removeItem("clientData");
-    navigate("/login"); // redirect to login page
+    // show confirmation
+    setShowConfirm(true);
   };
+
+  const doLogout = async () => {
+    await backendLogout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    try { localStorage.removeItem('cart'); } catch (e) {}
+    navigate('/login');
+  };
+
+  const [showConfirm, setShowConfirm] = useState(false);
 
   return (
     <div className="client-profile-container">
@@ -104,6 +126,17 @@ const ClientProfilePage = () => {
       <div className="logout-btn-container">
         <button onClick={handleLogout} className="logout-btn">🚪 Logout</button>
       </div>
+      {showConfirm && (
+        <div className="confirm-overlay">
+          <div className="confirm-box">
+            <p>Are you sure you want to logout?</p>
+            <div className="confirm-actions">
+              <button onClick={() => setShowConfirm(false)}>Cancel</button>
+              <button onClick={async () => { await doLogout(); }}>Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

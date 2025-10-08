@@ -90,3 +90,26 @@
   background: #e63950;
   transform: scale(1.05);
 }
+
+/* Confirmation modal */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+}
+.confirm-box {
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 320px;
+  text-align: center;
+}
+.confirm-actions { display:flex; gap:12px; justify-content:center; margin-top:12px }
+.confirm-actions button { padding:8px 12px; border-radius:8px; border:none }
+.confirm-actions button:first-child { background:#eee }
+.confirm-actions button:last-child { background:#ff4d6d; color:#fff }

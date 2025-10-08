@@ -15,69 +15,14 @@ const ServiceList = () => {
 
   useEffect(() => {
     const fetchProviders = async () => {
-      let formattedCategory, formattedSubservice;
-      
       try {
         setLoading(true);
-        console.log('Raw URL parameters:', { category, subService });
-        
-        // Format the category and subservice to match database values
-        formattedCategory = category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ');
-        
-        // Convert subservice parameter to match the database format (e.g., "hand" -> "Hand Embroidery")
-        const subserviceMap = {
-          'hand': 'Hand Embroidery',
-          'machine': 'Machine Embroidery',
-          'pearl': 'Pearl Embroidery',
-          'beads': 'Beads Embroidery',
-          'freestyle': 'Free Style Embroidery'
-        };
-        
-        formattedSubservice = subserviceMap[subService.toLowerCase()] || subService;
-        
-        console.log('Formatted parameters:', { 
-          formattedCategory, 
-          formattedSubservice,
-          mappingFound: subserviceMap.hasOwnProperty(subService.toLowerCase())
-        });
-        
-        console.log('Current route params:', { category, subService });
-        console.log('Fetching services with:', { formattedCategory, formattedSubservice });
-        
-        // Add request interceptor for debugging
-        axios.interceptors.request.use(request => {
-          console.log('Request URL:', request.url);
-          return request;
-        });
-
-        const response = await axios.get(
-          `${BASE_URL}/services/category/${encodeURIComponent(formattedCategory)}/subservice/${encodeURIComponent(formattedSubservice)}`
-        );
-        
-        console.log('Response status:', response.status);
-        console.log('Response data:', response.data);
-        
+        const response = await axios.get(`${BASE_URL}/services/category/${category}/subservice/${subService}`);
         setProviders(response.data);
         setError(null);
       } catch (err) {
-        const errorDetails = {
-          message: err.message,
-          response: err.response?.data,
-          status: err.response?.status,
-          url: err.config?.url,
-          requestParams: {
-            category: formattedCategory || category,
-            subservice: formattedSubservice || subService,
-            originalCategory: category,
-            originalSubservice: subService
-          }
-        };
-        console.error('Error details:', errorDetails);
-        setError(
-          `Failed to load service providers. ${err.response?.status === 404 ? 
-            'No providers found for this service.' : 
-            'Please try again later.'}`
-        );
+        console.error('Error fetching providers:', err);
+        setError('Failed to load service providers. Please try again later.');
       } finally {
         setLoading(false);
       }
